@@ -1,0 +1,600 @@
+class Helper_ItemEditor extends Object;
+
+
+//   ######    #######  ##    ##  ########  ####    ####      ###      ########  ##    #######
+//  ##        ##        ##    ##  ##        ## ##  ## ##     ## ##        ##     ##   ##
+//   #####   ##         ########  ####      ##  ####  ##    ## # ##       ##     ##  ##
+//       ##   ##        ##    ##  ##        ##        ##   ##     ##      ##     ##   ##
+//  ######     #######  ##    ##  ########  ##        ##  ##       ##     ##     ##    #######
+
+
+static function ModifyItemRewards(X2ItemTemplate Template, array<Name> ItemRewards)
+{
+	local X2SchematicTemplate SchematicTemplate;
+	local Name ItemName;
+
+	SchematicTemplate = X2SchematicTemplate(Template);
+
+	if(SchematicTemplate != none)
+	{
+		foreach ItemRewards(ItemName)
+		{
+			SchematicTemplate.ItemRewards.AddItem(ItemName);
+		}
+	}
+}
+
+static function ModifySquadUpgrade(X2ItemTemplate Template, Name SquadUpgrade)
+{
+	local X2SchematicTemplate SchematicTemplate;
+
+	SchematicTemplate = X2SchematicTemplate(Template);
+
+	if(SchematicTemplate != none)
+	{
+		if(SquadUpgrade != '')
+		{
+			if(SquadUpgrade == 'TRUE')
+			{
+				SchematicTemplate.bSquadUpgrade = true;
+			}
+			else if(SquadUpgrade == 'FALSE')
+			{
+				SchematicTemplate.bSquadUpgrade = false;
+			}
+			else
+			{
+				`LOG("Item Editor: SquadUpgrade is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+
+//  ##  ########  ########  ####    ####
+//  ##     ##     ##        ## ##  ## ##
+//  ##     ##     ####      ##  ####  ##
+//  ##     ##     ##        ##        ##
+//  ##     ##     ########  ##        ##
+
+
+static function ModifyRequiredTechs(X2ItemTemplate Template, array<Name> RequiredTechs)
+{
+	local Name TechName;
+
+	foreach RequiredTechs(TechName)
+	{
+		Template.Requirements.RequiredTechs.AddItem(TechName);
+	}
+}
+
+static function ModifyInfiniteItem(X2ItemTemplate Template, Name InfiniteItem)
+{
+	if(InfiniteItem != '')
+	{
+		if(InfiniteItem == 'TRUE')
+		{
+			Template.bInfiniteItem = true;
+		}
+			else if(InfiniteItem == 'FALSE')
+		{
+			Template.bInfiniteItem = false;
+		}
+		else
+		{
+			`LOG("Item Editor: InfiniteItem is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyCanBuildItem(X2ItemTemplate Template, Name CanBeBuilt)
+{
+	if(CanBeBuilt != '')
+	{
+		if(CanBeBuilt == 'TRUE')
+		{
+			Template.CanBeBuilt = true;
+		}
+		else if(CanBeBuilt == 'FALSE')
+		{
+			Template.CanBeBuilt = false;
+		}
+		else
+		{
+			`LOG("Item Editor: CanBeBuilt is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyOneTimeBuildItem(X2ItemTemplate Template, Name OneTimeBuild)
+{
+	if(OneTimeBuild != '')
+	{
+		if(OneTimeBuild == 'TRUE')
+		{
+			Template.bOneTimeBuild = true;
+		}
+		else if(OneTimeBuild == 'FALSE')
+		{
+			Template.bOneTimeBuild = false;
+		}
+		else
+		{
+			`LOG("Item Editor: OneTimeBuild is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyShouldHideInInventory(X2ItemTemplate Template, Name HideInInventory)
+{
+	if(HideInInventory != '')
+	{
+		if(HideInInventory == 'TRUE')
+		{
+			Template.HideInInventory = true;
+		}
+		else if(HideInInventory == 'FALSE')
+		{
+			Template.HideInInventory = false;
+		}
+		else
+		{
+			`LOG("Item Editor: HideInInventory is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyStartingItem(X2ItemTemplate Template, Name StartingItem)
+{
+	if(StartingItem != '')
+	{
+		if(StartingItem == 'TRUE')
+		{
+			Template.StartingItem = true;
+		}
+		else if(StartingItem == 'FALSE')
+		{
+			Template.StartingItem = false;
+		}
+		else
+		{
+			`LOG("Item Editor: StartingItem is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyPointsToComplete(X2ItemTemplate Template, String PointsToComplete)
+{
+	if(Len(PointsToComplete) != 0)
+	{
+		Template.PointsToComplete = int(PointsToComplete);
+	}
+}
+
+static function ModifyHideIfResearched(X2ItemTemplate Template, Name HideIfResearched)
+{
+	if(HideIfResearched != '')
+	{
+		if(HideIfResearched == 'None')
+		{
+			Template.HideIfResearched = '';
+		}
+		else
+		{
+			Template.HideIfResearched = HideIfResearched;
+		}
+	}
+}
+
+static function ModifyTradingPostValue(X2ItemTemplate Template, String TradingPostValue)
+{
+	if(Len(TradingPostValue) != 0)
+	{
+		Template.TradingPostValue = int(TradingPostValue);
+	}
+}
+
+static function ModifyResourceTemplateName(X2ItemTemplate Template, Name ResourceTemplateName)
+{
+	if(ResourceTemplateName != '')
+	{
+		Template.ResourceTemplateName = ResourceTemplateName;
+	}
+}
+
+static function ModifyResourceQuantity(X2ItemTemplate Template, String ResourceQuantity)
+{
+	if(Len(ResourceQuantity) != 0)
+	{
+		Template.ResourceQuantity = int(ResourceQuantity);
+	}
+}
+
+static function ModifyOnBuiltFn(X2ItemTemplate Template, bool DontGiveItem)
+{
+	if(DontGiveItem)
+	{
+		Template.OnBuiltFn = none;
+	}
+}
+
+
+// ##             ##  ########      ###      #######      #####     ####    ##
+//  ##     #     ##   ##           ## ##     ##    ##   ##     ##   ## ##   ##
+//   ##   ###   ##    ####        ## # ##    #######   ##       ##  ##  ##  ##
+//    ## ## ## ##     ##         ##     ##   ##         ##     ##   ##   ## ##
+//     ###   ###      ########  ##       ##  ##           #####     ##    ####
+
+
+static function ModifyInfiniteAmmo(X2ItemTemplate Template, Name InfiniteAmmo)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(InfiniteAmmo != '')
+		{
+			if(InfiniteAmmo == 'TRUE')
+			{
+				WeaponTemplate.InfiniteAmmo = true;
+			}
+			else if(InfiniteAmmo == 'FALSE')
+			{
+				WeaponTemplate.InfiniteAmmo = false;
+			}
+			else
+			{
+				`LOG("Item Editor: InfiniteAmmo is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function ModifyMergeAmmo(X2ItemTemplate Template, Name MergeAmmo)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(MergeAmmo != '')
+		{
+			if(MergeAmmo == 'TRUE')
+			{
+				WeaponTemplate.bMergeAmmo = true;
+			}
+			else if(MergeAmmo == 'FALSE')
+			{
+				WeaponTemplate.bMergeAmmo = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bMergeAmmo is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function ModifyCanBeDodged(X2ItemTemplate Template, Name CanBeDodged)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(CanBeDodged != '')
+		{
+			if(CanBeDodged == 'TRUE')
+			{
+				WeaponTemplate.bCanBeDodged = true;
+			}
+			else if(CanBeDodged == 'FALSE')
+			{
+				WeaponTemplate.bCanBeDodged= false;
+			}
+			else
+			{
+				`LOG("Item Editor: bCanBeDodged is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function ModifyUseArmorAppearance(X2ItemTemplate Template, Name UseArmorAppearance)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(UseArmorAppearance != '')
+		{
+			if(UseArmorAppearance == 'TRUE')
+			{
+				WeaponTemplate.bUseArmorAppearance = true;
+			}
+			else if(UseArmorAppearance == 'FALSE')
+			{
+				WeaponTemplate.bUseArmorAppearance = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bUseArmorAppearance is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function OverrideConcealmentRule(X2ItemTemplate Template, Name bOverrideConcealmentRule, Name ConcealmentRule)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(bOverrideConcealmentRule != '')
+		{
+			if(bOverrideConcealmentRule == 'TRUE')
+			{
+				WeaponTemplate.bOverrideConcealmentRule = true;
+
+				if(ConcealmentRule != '')
+				{
+					switch(ConcealmentRule)
+					{
+						case 'NonOffensive':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_NonOffensive; //  Always retain Concealment if the Hostility != Offensive (default behavior)
+							break;
+						case 'Always':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_Always; //  Always retain Concealment, period
+							break;
+						case 'Never':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_Never; //  Never retain Concealment, period
+							break;
+						case 'KillShot':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_KillShot; //  Retain concealment when killing a single (primary) target
+							break;
+						case 'Miss':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_Miss; //  Retain concealment when the ability misses
+							break;
+						case 'MissOrKillShot':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_MissOrKillShot; //  Retain concealment when the ability misses or when killing a single (primary) target
+							break;
+						case 'AlwaysEvenWithObjective':
+							WeaponTemplate.OverrideConcealmentRule = eConceal_AlwaysEvenWithObjective; //  Always retain Concealment, even if the target is an objective
+							break;
+					}
+				}
+			}
+			else if(bOverrideConcealmentRule == 'FALSE')
+			{
+				WeaponTemplate.bOverrideConcealmentRule = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bOverrideConcealmentRule is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+
+//      ###      #######   ####    ####     #####     ####### 
+//     ## ##     ##    ##  ## ##  ## ##   ##     ##   ##    ##
+//    ## # ##    #######   ##  ####  ##  ##       ##  ####### 
+//   ##     ##   ##   ##   ##        ##   ##     ##   ##   ## 
+//  ##       ##  ##    ##  ##        ##     #####     ##    ##
+
+
+static function ModifyHeavyWeapon(X2ItemTemplate Template, Name HeavyWeapon)
+{
+	local X2ArmorTemplate ArmorTemplate;
+
+	ArmorTemplate = X2ArmorTemplate(Template);
+
+	if(ArmorTemplate != none)
+	{
+		if(HeavyWeapon != '')
+		{
+			if(HeavyWeapon == 'TRUE')
+			{
+				ArmorTemplate.bHeavyWeapon = true;
+			}
+			else if(HeavyWeapon == 'FALSE')
+			{
+				ArmorTemplate.bHeavyWeapon = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bHeavyWeapon is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function ModifyUtilitySlot(X2ItemTemplate Template, Name AddsUtilitySlot)
+{
+	local X2ArmorTemplate ArmorTemplate;
+
+	ArmorTemplate = X2ArmorTemplate(Template);
+
+	if(ArmorTemplate != none)
+	{
+		if(AddsUtilitySlot != '')
+		{
+			if(AddsUtilitySlot == 'TRUE')
+			{
+				ArmorTemplate.bAddsUtilitySlot = true;
+			}
+			else if(AddsUtilitySlot == 'FALSE')
+			{
+				ArmorTemplate.bAddsUtilitySlot = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bAddsUtilitySlot is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+//      ###      ####    ####  ####    ####     #####
+//     ## ##     ## ##  ## ##  ## ##  ## ##   ##     ##
+//    ## # ##    ##  ####  ##  ##  ####  ##  ##       ##
+//   ##     ##   ##        ##  ##        ##   ##     ##
+//  ##       ##  ##        ##  ##        ##     #####
+
+
+static function ModifyBypassShields(X2ItemTemplate Template, Name BypassShields)
+{
+	local X2AmmoTemplate AmmoTemplate;
+
+	AmmoTemplate = X2AmmoTemplate(Template);
+
+	if(AmmoTemplate != none)
+	{
+		if(BypassShields != '')
+		{
+			if(BypassShields == 'TRUE')
+			{
+				AmmoTemplate.bBypassShields = true;
+			}
+			else if(BypassShields == 'FALSE')
+			{
+				AmmoTemplate.bBypassShields = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bBypassShields is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+//  ########     #####     ##     ##  ##  #######   ####    ####  ########  ####    ##  ########
+//  ##         ##     ##   ##     ##  ##  ##    ##  ## ##  ## ##  ##        ## ##   ##     ##
+//  ####      ##       ##  ##     ##  ##  #######   ##  ####  ##  ####      ##  ##  ##     ##
+//  ##         ##   # ##   ##     ##  ##  ##        ##        ##  ##        ##   ## ##     ##
+//  ########     ##### #    #######   ##  ##        ##        ##  ########  ##    ####     ##
+
+
+static function ModifyUseBoostIncrement(X2ItemTemplate Template, Name UseBoostIncrement)
+{
+	local X2EquipmentTemplate EquipmentTemplate;
+
+	EquipmentTemplate = X2EquipmentTemplate(Template);
+
+	if(EquipmentTemplate != none)
+	{
+		if(UseBoostIncrement != '')
+		{
+			if(UseBoostIncrement == 'TRUE')
+			{
+				EquipmentTemplate.bUseBoostIncrement = true;
+			}
+			else if(UseBoostIncrement == 'FALSE')
+			{
+				EquipmentTemplate.bUseBoostIncrement = false;
+			}
+			else
+			{
+				`LOG("Item Editor: bUseBoostIncrement is neither TRUE or FALSE.");
+			}
+		}
+	}
+}
+
+static function ModifyStatsToBoost(X2ItemTemplate Template, array<Name> StatsToBoost)
+{
+	local X2EquipmentTemplate EquipmentTemplate;
+	local Name StatName;
+
+	EquipmentTemplate = X2EquipmentTemplate(Template);
+
+	if(EquipmentTemplate != none)
+	{
+		foreach StatsToBoost(StatName)
+		{
+			switch(StatName)
+			{
+				case 'HP':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_HP);
+					break;
+				case 'Offense':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Offense);
+					break;
+				case 'Mobility':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Mobility);
+					break;
+				case 'Dodge':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Dodge);
+					break;
+				case 'Will':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Will);
+					break;
+				case 'Hacking':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Hacking);
+					break;
+				case 'ArmorMitigation':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_ArmorMitigation);
+					break;
+				case 'CritChance':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_CritChance);
+					break;
+				case 'Defense':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_Defense);
+					break;
+				case 'PsiOffense':
+					EquipmentTemplate.StatsToBoost.AddItem(eStat_PsiOffense);
+					break;
+			}
+		}
+	}
+}
+
+static function ModifyInventorySlot(X2ItemTemplate Template, Name InventorySlot)
+{
+	local X2EquipmentTemplate EquipmentTemplate;
+
+	EquipmentTemplate = X2EquipmentTemplate(Template);
+
+	if(EquipmentTemplate != none)
+	{
+		if(InventorySlot != '')
+		{
+			switch(InventorySlot)
+			{
+				case 'PrimaryWeapon':
+					EquipmentTemplate.InventorySlot = eInvSlot_PrimaryWeapon;
+					break;
+				case 'SecondaryWeapon':
+					EquipmentTemplate.InventorySlot = eInvSlot_SecondaryWeapon;
+					break;
+				case 'TertiaryWeapon':
+					EquipmentTemplate.InventorySlot = eInvSlot_TertiaryWeapon;
+					break;
+				case 'Utility':
+					EquipmentTemplate.InventorySlot = eInvSlot_Utility;
+					break;
+				case 'Mission':
+					EquipmentTemplate.InventorySlot = eInvSlot_Mission;
+					break;
+				case 'CombatSim':
+					EquipmentTemplate.InventorySlot = eInvSlot_CombatSim;
+					break;
+				case 'HeavyWeapon':
+					EquipmentTemplate.InventorySlot = eInvSlot_HeavyWeapon;
+					break;
+				case 'Backpack':
+					EquipmentTemplate.InventorySlot = eInvSlot_Backpack;
+					break;
+			}
+		}
+	}
+}

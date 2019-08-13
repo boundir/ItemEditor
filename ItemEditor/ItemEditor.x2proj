@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Guid>92a4427a-0ea8-4b94-ae0e-011761bacc71</Guid>
+    <Name>ItemEditor</Name>
+    <Description>Description of My XCOM 2 Mod.</Description>
+    <SteamPublishID>0</SteamPublishID>
+    <AssemblyName>ItemEditor</AssemblyName>
+    <RootNamespace>ItemEditor</RootNamespace>
+    <ProjectGuid>{cb486e28-093a-4dff-9379-3d276f1210f7}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Localization\" />
+    <Folder Include="Src\" />
+    <Folder Include="Src\ItemEditor\" />
+    <Folder Include="Src\ItemEditor\Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\XComItemEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ReadMe.txt" />
+    <Content Include="ModPreview.jpg" />
+    <Content Include="Config\XComEditor.ini" />
+    <Content Include="Config\XComEngine.ini" />
+    <Content Include="Config\XComGame.ini" />
+    <Content Include="Localization\XComGame.int" />
+    <Content Include="Src\ItemEditor\Classes\Helper_ItemEditor.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ItemEditor\Classes\OPTC_Items.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ItemEditor\Classes\X2DownloadableContentInfo_ItemEditor.uc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+</Project>
