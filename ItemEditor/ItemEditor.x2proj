@@ -3,7 +3,8 @@
   <PropertyGroup>
     <Guid>92a4427a-0ea8-4b94-ae0e-011761bacc71</Guid>
     <Name>ItemEditor</Name>
-    <Description>Description of My XCOM 2 Mod.</Description>
+    <Description>This mod allows you to modify any item (vanilla and modded ones).
+tags= War of the Chosen, Config, Gameplay</Description>
     <SteamPublishID>0</SteamPublishID>
     <AssemblyName>ItemEditor</AssemblyName>
     <RootNamespace>ItemEditor</RootNamespace>

@@ -151,14 +151,8 @@ Accepted values:
 
 [h1]Usage[/h1]
 
-Can be used by other mods to modify existing abilitiy templates by adding [u]XComAbilityEditor.ini[/u] to the mod config.
+Can be used by other mods to modify existing item templates by adding [u]XComItemEditor.ini[/u] to the mod config.
 Can be used by anyone willing to tweak his game even more.
-
-[u]Examples:[/u]
-[code]
-[ItemEditor.OPTC_Items]
-
-[/code]
 
 [h1]Compatibility[/h1]
 It should be compatible with everything.
