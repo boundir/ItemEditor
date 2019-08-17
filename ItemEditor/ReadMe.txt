@@ -21,6 +21,9 @@ This mod allows you to modify any item (vanilla and modded ones).
 [u]ResourceTemplateName[/u] - [i]String[/i]
 [b]Optional[/b] - This item awards the specified Resource when it is acquired.
 
+[u]HideIfResearched[/u] - [i]String[/i]
+[b]Optional[/b] - If this tech is researched, do not display in Build Items. If you want to remove the existing one put FALSE.
+
 [u]CanBeBuilt[/u] - [i]Bool[/i]
 [b]Optional[/b] - Can XCom HQ build this item.
 
@@ -39,8 +42,28 @@ This mod allows you to modify any item (vanilla and modded ones).
 [u]DontGiveItem[/u] - [i]Bool[/i]
 [b]Optional[/b] - If True, removes the function in OnBuiltFn.
 
+[u]OnBuilt[/u] - [i]String[/i]
+[b]Optional[/b] - If DontGiveItem, will apply one of these functions.
+Accepted values:
+[list]
+    [*] GiveItem - Building this item will grant items added to ItemRewards.
+    [*] UpgradeItems - Upgrade the item.
+[/list]
+
 [u]RequiredTechs[/u] - [i]Array (string)[/i]
 [b]Optional[/b] - Names of tech required to be able to build.
+
+[u]iNeedEngineer[/u] - [i]Integer[/i]
+[b]Optional[/b] - Number of Engineers needed to build this item.
+
+[u]iNeedSciencist[/u] - [i]Integer[/i]
+[b]Optional[/b] - Number of Sciencists needed to build this item.
+
+[u]bVisibleIfPersonnelGatesNotMet[/u] - [i]Bool[/i]
+[b]Optional[/b] - Display a message if the staff requirements are not met.
+
+[u]RequiredSoldierClass[/u] - [i]String[/i]
+[b]Optional[/b] - Class needed to build this item. If you want to remove the existing one put FALSE.
 
 [u]Cost[/u] - [i]Array[/i]
 [list]
@@ -57,6 +80,8 @@ This mod allows you to modify any item (vanilla and modded ones).
 [/list]
 [b]Optional[/b] - Cost to build this item.
 
+[u]RemovePreviousCost[/u] - [i]Bool[/i]
+[b]Optional[/b] - If True, removes previous costs for the item.
 
 [b][u]Schematics[/u][/b]
 
@@ -74,7 +99,7 @@ This mod allows you to modify any item (vanilla and modded ones).
 
 [u]InventorySlot[/u] - [i]String[/i]
 [b]Optional[/b] - Place occupied by this item.
-Accepte values:
+Accepted values:
 [list]
     [*] PrimaryWeapon
     [*] SecondaryWeapon
@@ -153,6 +178,21 @@ Accepted values:
 
 Can be used by other mods to modify existing item templates by adding [u]XComItemEditor.ini[/u] to the mod config.
 Can be used by anyone willing to tweak his game even more.
+
+[u]Examples[/u]
+[code]
+[ItemEditor.OPTC_Items]
+AP rounds will ignore shields
++Items=(TemplateName=APRounds, bBypassShields=true)
+Bluescreen rounds will no longer ignore shields
++Items=(TemplateName=BluescreenRounds, bBypassShields=false)
+
+Grant Psi stat bonus to Focus PSC as well as Will
++Items=(TemplateName=CommonPCSFocus, StatsToBoost[0]=PsiOffense)
++Items=(TemplateName=RarePCSFocus, StatsToBoost[0]=PsiOffense)
++Items=(TemplateName=EpicPCSFocus, StatsToBoost[0]=PsiOffense)
+[/code]
+
 
 [h1]Compatibility[/h1]
 It should be compatible with everything.

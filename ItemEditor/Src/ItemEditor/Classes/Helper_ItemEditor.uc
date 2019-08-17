@@ -175,13 +175,28 @@ static function ModifyHideIfResearched(X2ItemTemplate Template, Name HideIfResea
 {
 	if(HideIfResearched != '')
 	{
-		if(HideIfResearched == 'None')
+		if(HideIfResearched == 'FALSE')
 		{
 			Template.HideIfResearched = '';
 		}
 		else
 		{
 			Template.HideIfResearched = HideIfResearched;
+		}
+	}
+}
+
+static function ModifyRequiredSoldierClass(X2ItemTemplate Template, Name RequiredSoldierClass)
+{
+	if(RequiredSoldierClass != '')
+	{
+		if(RequiredSoldierClass == 'FALSE')
+		{
+			Template.Requirements.RequiredSoldierClass = '';
+		}
+		else
+		{
+			Template.Requirements.RequiredSoldierClass = RequiredSoldierClass;
 		}
 	}
 }
@@ -210,11 +225,58 @@ static function ModifyResourceQuantity(X2ItemTemplate Template, String ResourceQ
 	}
 }
 
-static function ModifyOnBuiltFn(X2ItemTemplate Template, bool DontGiveItem)
+static function ModifyRequiredEngineer(X2ItemTemplate Template, String StaffNeeded)
+{
+	if(Len(StaffNeeded) != 0)
+	{
+		Template.Requirements.RequiredEngineeringScore = int(StaffNeeded);
+	}
+}
+
+static function ModifyRequiredScientist(X2ItemTemplate Template, String StaffNeeded)
+{
+	if(Len(StaffNeeded) != 0)
+	{
+		Template.Requirements.RequiredScienceScore = int(StaffNeeded);
+	}
+}
+
+static function ModifyRequirementNotMet(X2ItemTemplate Template, Name AlertOnRequirementNotMet)
+{
+	if(AlertOnRequirementNotMet != '')
+	{
+		if(AlertOnRequirementNotMet == 'TRUE')
+		{
+			Template.Requirements.bVisibleIfPersonnelGatesNotMet = true;
+		}
+		else if(AlertOnRequirementNotMet == 'FALSE')
+		{
+			Template.Requirements.bVisibleIfPersonnelGatesNotMet = false;
+		}
+		else
+		{
+			`LOG("Item Editor: bVisibleIfPersonnelGatesNotMet is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyOnBuiltFn(X2ItemTemplate Template, Name OnBuilt = '', optional bool DontGiveItem)
 {
 	if(DontGiveItem)
 	{
 		Template.OnBuiltFn = none;
+	}
+	else
+	{
+		switch(OnBuilt)
+		{
+			case 'GiveItem' :
+				Template.OnBuiltFn = class'X2Item_DefaultSchematics'.static.GiveItems;
+				break;
+			case 'UpgradeItems' :
+				Template.OnBuiltFn = class'X2Item_DefaultSchematics'.static.UpgradeItems;
+				break;
+		}
 	}
 }
 
