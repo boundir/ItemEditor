@@ -24,6 +24,8 @@ struct native ItemStruct
 	var Name TemplateName;
 	var ItemCostStruct Cost;
 	var bool RemovePreviousCost;
+	var bool RemoveFromRewardDeck;				// Remove this item from Proving Ground rewards.
+	var array<name> RewardDecks;				// This item template should be added to all of these reward decks.
 	var array<Name> RequiredTechs;
 	var String iNeedEngineer;					// Number of Engineers needed to build this item.
 	var String iNeedSciencist;					// Number of Sciencists needed to build this item.
@@ -41,18 +43,17 @@ struct native ItemStruct
 	var String ResourceQuantity;				// The amount of that Resource to be acquired
 	var Name ResourceTemplateName;				// This item awards the specified Resource when it is acquired
 	var Name HideIfResearched;					// If this tech is researched, do not display in Build Items
+	var Name HideIfPurchased;					// If the referenced item is purchased, do not display in Build Items
+	var Name CreatorTemplateName;				// This item is created by this template (normally a schematic or tech)
 	// TODO
 	var int Tier;								// The tier this item should be assigned to. Used for sorting lists.
 	var bool bAlwaysRecovered;					// When this loot is rolled, auto recover it immediately; don't offer it as normal looting options.
 	var bool bOkayToConcealAsObjective;			// Even if this item is an objective item, it's okay to get concealed when carrying it (see: X2Condition_Stealth)
 	var bool bBlocked;							// This item must be unblocked before it can be built
-	var Name CreatorTemplateName;				// This item is created by this template (normally a schematic or tech)
 	var Name UpgradeItem;						// This item can be upgraded into another item defined by the named template
 	var Name BaseItem;							// The item this one was upgraded from
-	var Name HideIfPurchased;					// If the referenced item is purchased, do not display in Build Items
 	var Name ItemCat;							// must match one of the entries in X2ItemTemplateManager's ItemCategories
 	var bool HideInLootRecovered;				// Should the item appear on the loot recovered screen
-	var array<name> RewardDecks;				// This item template should be added to all of these reward decks.
 	
 	// SCHEMATIC VARIABLES
 	var Name SquadUpgrade;
@@ -67,13 +68,13 @@ struct native ItemStruct
 	var Name bUseArmorAppearance;				// This weapon will use the armor tinting values instead of the weapons
 	var Name bOverrideConcealmentRule;
 	var Name ConcealmentRule;					// This is only used if bOverrideConcealmentRule is true
+	var String iClipSize;						// ammo amount before a reload is required
 	// TODO
 	var Name DamageTypeTemplateName;			// Template name for the type of ENVIRONMENT damage this weapon does
 	var int iEnvironmentDamage;					// damage to environmental effects; should be 50, 100, or 150.
 	var int iRange;								// -1 will mean within the unit's sight, 0 means melee
 	var int iRadius;							// radius in METERS for AOE range
 	var int iTypicalActionCost;					// typical cost in action points to fire the weapon (only used by some abilities)
-	var int iClipSize;							// ammo amount before a reload is required
 	var int Aim;
 	var int CritChance;
 	var int NumUpgradeSlots;					// Number of weapon slots available
@@ -135,6 +136,7 @@ static event OnPostTemplatesCreated()
 				class'Helper_ItemEditor'.static.ModifyCanBuildItem(ItemTemplate, ItemConfig.CanBeBuilt);
 				class'Helper_ItemEditor'.static.ModifyOneTimeBuildItem(ItemTemplate, ItemConfig.OneTimeBuild);
 				class'Helper_ItemEditor'.static.ModifyShouldHideInInventory(ItemTemplate, ItemConfig.HideInInventory);
+				class'Helper_ItemEditor'.static.ModifyRewardDecks(ItemTemplate, ItemConfig.RewardDecks, ItemConfig.RemoveFromRewardDeck);
 				class'Helper_ItemEditor'.static.ModifyRequiredTechs(ItemTemplate, ItemConfig.RequiredTechs);
 				class'Helper_ItemEditor'.static.ModifyRequiredEngineer(ItemTemplate, ItemConfig.iNeedEngineer);
 				class'Helper_ItemEditor'.static.ModifyRequiredScientist(ItemTemplate, ItemConfig.iNeedSciencist);
@@ -147,6 +149,8 @@ static event OnPostTemplatesCreated()
 				class'Helper_ItemEditor'.static.ModifyResourceTemplateName(ItemTemplate, ItemConfig.ResourceTemplateName);
 				class'Helper_ItemEditor'.static.ModifyResourceQuantity(ItemTemplate, ItemConfig.ResourceQuantity);
 				class'Helper_ItemEditor'.static.ModifyHideIfResearched(ItemTemplate, ItemConfig.HideIfResearched);
+				class'Helper_ItemEditor'.static.ModifyHideIfPurchased(ItemTemplate, ItemConfig.HideIfPurchased);
+				class'Helper_ItemEditor'.static.ModifyCreatorTemplateName(ItemTemplate, ItemConfig.CreatorTemplateName);
 
 				if(ItemConfig.RemovePreviousCost)
 				{
@@ -179,6 +183,7 @@ static event OnPostTemplatesCreated()
 
 				// WEAPONS
 				class'Helper_ItemEditor'.static.ModifyInfiniteAmmo(ItemTemplate, ItemConfig.InfiniteAmmo);
+				class'Helper_ItemEditor'.static.ModifyClipSize(ItemTemplate, ItemConfig.iClipSize);
 				class'Helper_ItemEditor'.static.ModifyMergeAmmo(ItemTemplate, ItemConfig.bMergeAmmo);
 				class'Helper_ItemEditor'.static.ModifyCanBeDodged(ItemTemplate, ItemConfig.bCanBeDodged);
 				class'Helper_ItemEditor'.static.ModifyUseArmorAppearance(ItemTemplate, ItemConfig.bUseArmorAppearance);

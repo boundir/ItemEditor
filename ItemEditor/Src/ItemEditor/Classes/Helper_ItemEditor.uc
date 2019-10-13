@@ -58,6 +58,21 @@ static function ModifySquadUpgrade(X2ItemTemplate Template, Name SquadUpgrade)
 //  ##     ##     ########  ##        ##
 
 
+static function ModifyRewardDecks(X2ItemTemplate Template, array<Name> RewardDecks, optional bool RemoveFromRewardDeck)
+{
+	local Name RewardDeck;
+
+	if(RemoveFromRewardDeck)
+	{
+		Template.RewardDecks.Length = 0;
+	}
+
+	foreach RewardDecks(RewardDeck)
+	{
+		Template.RewardDecks.AddItem(RewardDeck);
+	}
+}
+
 static function ModifyRequiredTechs(X2ItemTemplate Template, array<Name> RequiredTechs)
 {
 	local Name TechName;
@@ -83,6 +98,21 @@ static function ModifyInfiniteItem(X2ItemTemplate Template, Name InfiniteItem)
 		else
 		{
 			`LOG("Item Editor: InfiniteItem is neither TRUE or FALSE.");
+		}
+	}
+}
+
+static function ModifyCreatorTemplateName(X2ItemTemplate Template, Name CreatorTemplateName)
+{
+	if(CreatorTemplateName != '')
+	{
+		if(CreatorTemplateName == 'None')
+		{
+			Template.CreatorTemplateName = '';
+		}
+		else
+		{
+			Template.CreatorTemplateName = CreatorTemplateName;
 		}
 	}
 }
@@ -182,6 +212,21 @@ static function ModifyHideIfResearched(X2ItemTemplate Template, Name HideIfResea
 		else
 		{
 			Template.HideIfResearched = HideIfResearched;
+		}
+	}
+}
+
+static function ModifyHideIfPurchased(X2ItemTemplate Template, Name HideIfPurchased)
+{
+	if(HideIfPurchased != '')
+	{
+		if(HideIfPurchased == 'FALSE')
+		{
+			Template.HideIfPurchased = '';
+		}
+		else
+		{
+			Template.HideIfPurchased = HideIfPurchased;
 		}
 	}
 }
@@ -310,6 +355,21 @@ static function ModifyInfiniteAmmo(X2ItemTemplate Template, Name InfiniteAmmo)
 			{
 				`LOG("Item Editor: InfiniteAmmo is neither TRUE or FALSE.");
 			}
+		}
+	}
+}
+
+static function ModifyClipSize(X2ItemTemplate Template, String ClipSize)
+{
+	local X2WeaponTemplate WeaponTemplate;
+
+	WeaponTemplate = X2WeaponTemplate(Template);
+
+	if(WeaponTemplate != none)
+	{
+		if(Len(ClipSize) != 0)
+		{
+			WeaponTemplate.iClipSize = int(ClipSize);
 		}
 	}
 }

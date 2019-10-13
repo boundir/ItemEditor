@@ -21,11 +21,23 @@ This mod allows you to modify any item (vanilla and modded ones).
 [u]ResourceTemplateName[/u] - [i]String[/i]
 [b]Optional[/b] - This item awards the specified Resource when it is acquired.
 
+[u]CreatorTemplateName[/u] - [i]String[/i]
+[b]Optional[/b] - This item is created by this template (normally a schematic or tech).
+
 [u]HideIfResearched[/u] - [i]String[/i]
 [b]Optional[/b] - If this tech is researched, do not display in Build Items. If you want to remove the existing one put FALSE.
 
+[u]HideIfPurchased[/u] - [i]String[/i]
+[b]Optional[/b] - If the referenced item is purchased, do not display in Build Items. If you want to remove the existing one put FALSE.
+
 [u]CanBeBuilt[/u] - [i]Bool[/i]
 [b]Optional[/b] - Can XCom HQ build this item.
+
+[u]RemoveFromRewardDeck[/u] - [i]Bool[/i]
+[b]Optional[/b] - Remove this item from Proving Ground rewards.
+
+[u]RewardDecks[/u] - [i]Array (string)[/i]
+[b]Optional[/b] - This item template should be added to all of these reward decks.
 
 [u]InfiniteItem[/u] - [i]Bool[/i]
 [b]Optional[/b] - Does this item have infinite quantity in the inventory (Starting Items are assumed to work this way).
@@ -157,6 +169,9 @@ Accepted values:
     [*] MissOrKillShot - Retain concealment when the ability misses or when killing a single (primary) target
     [*] AlwaysEvenWithObjective - Always retain Concealment, even if the target is an objective
 [/list]
+
+[u]iClipSize[/u] - [i]Integer[/i]
+[b]Optional[/b] - The ammo amount.
 
 
 [b][u]Armors[/u][/b]
