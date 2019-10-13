@@ -33,6 +33,9 @@ This mod allows you to modify any item (vanilla and modded ones).
 [u]CanBeBuilt[/u] - [i]Bool[/i]
 [b]Optional[/b] - Can XCom HQ build this item.
 
+[u]DestroyedWithExplosive[/u] - [i]Bool[/i]
+[b]Optional[/b] - if true, if the unit carrying this item as loot is killed by an explosive, the player gets NOTHING.
+
 [u]RemoveFromRewardDeck[/u] - [i]Bool[/i]
 [b]Optional[/b] - Remove this item from Proving Ground rewards.
 

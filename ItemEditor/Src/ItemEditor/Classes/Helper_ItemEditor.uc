@@ -102,6 +102,25 @@ static function ModifyInfiniteItem(X2ItemTemplate Template, Name InfiniteItem)
 	}
 }
 
+static function ModifyLeavesExplosiveRemains(X2ItemTemplate Template, Name DestroyedWithExplosive)
+{
+	if(DestroyedWithExplosive != '')
+	{
+		if(DestroyedWithExplosive == 'TRUE')
+		{
+			Template.LeavesExplosiveRemains = false;
+		}
+			else if(DestroyedWithExplosive == 'FALSE')
+		{
+			Template.LeavesExplosiveRemains = true;
+		}
+		else
+		{
+			`LOG("Item Editor: DestroyedWithExplosive is neither TRUE or FALSE.");
+		}
+	}
+}
+
 static function ModifyCreatorTemplateName(X2ItemTemplate Template, Name CreatorTemplateName)
 {
 	if(CreatorTemplateName != '')

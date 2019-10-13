@@ -31,6 +31,7 @@ struct native ItemStruct
 	var String iNeedSciencist;					// Number of Sciencists needed to build this item.
 	var Name RequiredSoldierClass;				// Class needed to build this item.
 	var Name bVisibleIfPersonnelGatesNotMet;	// Display a message if the staff requirements are not met.
+	var Name DestroyedWithExplosive;			// if true, if the unit carrying this item as loot is killed by an explosive, the player gets NOTHING
 	var Name InfiniteItem;						// Does this item have infinite quantity in the inventory (Starting Items are assumed to work this way)
 	var Name CanBeBuilt;						// Can XCom HQ build this item
 	var Name HideInInventory;					// Should the item appear in HQ's inventory screen
@@ -132,6 +133,7 @@ static event OnPostTemplatesCreated()
 				class'Helper_ItemEditor'.static.ModifyItemRewards(ItemTemplate, ItemConfig.ItemRewards);
 
 				// ITEMS
+				class'Helper_ItemEditor'.static.ModifyLeavesExplosiveRemains(ItemTemplate, ItemConfig.DestroyedWithExplosive);
 				class'Helper_ItemEditor'.static.ModifyInfiniteItem(ItemTemplate, ItemConfig.InfiniteItem);
 				class'Helper_ItemEditor'.static.ModifyCanBuildItem(ItemTemplate, ItemConfig.CanBeBuilt);
 				class'Helper_ItemEditor'.static.ModifyOneTimeBuildItem(ItemTemplate, ItemConfig.OneTimeBuild);
