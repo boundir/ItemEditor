@@ -125,6 +125,27 @@ Accepted values:
     [*] HeavyWeapon
     [*] Backpack
 [/list]
+Modded values accepted:
+[list]
+    [*] Vest
+    [*] AugmentationHead
+    [*] AugmentationTorso
+    [*] AugmentationArms
+    [*] AugmentationLegs
+    [*] CombatDrugs
+    [*] Decorations
+    [*] PsiAmp
+    [*] Plating
+    [*] SparkLauncher
+    [*] ExtraSecondary
+    [*] PrimaryPayload
+    [*] SecondaryPayload
+    [*] ExtraRocket1
+    [*] ExtraRocket2
+    [*] ExtraRocket3
+    [*] ExtraRocket4
+    [*] Pistol
+[/list]
 
 [u]StatsToBoost[/u] - [i]String[/i]
 [b]Optional[/b] - What character stats does this item apply the boosts to?

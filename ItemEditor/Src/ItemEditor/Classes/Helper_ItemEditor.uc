@@ -735,6 +735,61 @@ static function ModifyInventorySlot(X2ItemTemplate Template, Name InventorySlot)
 				case 'Backpack':
 					EquipmentTemplate.InventorySlot = eInvSlot_Backpack;
 					break;
+				// Support for modded slot (require CHL)
+				case 'Vest':
+					EquipmentTemplate.InventorySlot = eInvSlot_Vest;
+					break;
+				case 'AugmentationHead':
+					EquipmentTemplate.InventorySlot = eInvSlot_AugmentationHead;
+					break;
+				case 'AugmentationTorso':
+					EquipmentTemplate.InventorySlot = eInvSlot_AugmentationTorso;
+					break;
+				case 'AugmentationArms':
+					EquipmentTemplate.InventorySlot = eInvSlot_AugmentationArms;
+					break;
+				case 'AugmentationLegs':
+					EquipmentTemplate.InventorySlot = eInvSlot_AugmentationLegs;
+					break;
+				case 'CombatDrugs':
+					EquipmentTemplate.InventorySlot = eInvSlot_CombatDrugs;
+					break;
+				case 'Decorations':
+					EquipmentTemplate.InventorySlot = eInvSlot_Decorations;
+					break;
+				case 'PsiAmp':
+					EquipmentTemplate.InventorySlot = eInvSlot_PsiAmp;
+					break;
+				case 'Plating':
+					EquipmentTemplate.InventorySlot = eInvSlot_Plating;
+					break;
+				case 'SparkLauncher':
+					EquipmentTemplate.InventorySlot = eInvSlot_SparkLauncher;
+					break;
+				case 'ExtraSecondary':
+					EquipmentTemplate.InventorySlot = eInvSlot_ExtraSecondary;
+					break;
+				case 'PrimaryPayload':
+					EquipmentTemplate.InventorySlot = eInvSlot_PrimaryPayload;
+					break;
+				case 'SecondaryPayload':
+					EquipmentTemplate.InventorySlot = eInvSlot_SecondaryPayload;
+					break;
+				case 'ExtraRocket1':
+					EquipmentTemplate.InventorySlot = eInvSlot_ExtraRocket1;
+					break;
+				case 'ExtraRocket2':
+					EquipmentTemplate.InventorySlot = eInvSlot_ExtraRocket2;
+					break;
+				case 'ExtraRocket3':
+					EquipmentTemplate.InventorySlot = eInvSlot_ExtraRocket3;
+					break;
+				case 'ExtraRocket4':
+					EquipmentTemplate.InventorySlot = eInvSlot_ExtraRocket4;
+					break;
+				case 'Pistol':
+					EquipmentTemplate.InventorySlot = eInvSlot_Pistol;
+					break;
 			}
 		}
 	}
